@@ -46,13 +46,13 @@ void PrintPathData (const vector<PathData>& results, string FST_FLAGS_word,
     if (print_scores == true) {
       if (nlog_probs == true) 
 	cout << results [i].PathWeight << "\t";
-      else
+        else
 	cout << std::setprecision (3) << exp (-results [i].PathWeight) << "\t";
     }
     
-    for (int j = 0; j < results [i].Uniques.size (); j++) {
-      cout << osyms->Find (results [i].Uniques [j]);
-      if (j < results [i].Uniques.size () - 1)
+      for (int j = 0; j < results[i].Uniques.size(); j++) {
+      cout << osyms->Find(results[i].Uniques[j]);
+      if (j < results[i].Uniques.size() - 1)
 	cout << " ";
     }
     cout << endl;
