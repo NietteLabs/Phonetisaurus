@@ -532,7 +532,7 @@ dist_bin_SCRIPTS = \
 	src/scripts/phonetisaurus-apply     \
 	src/scripts/phonetisaurus-train
 
-AM_CPPFLAGS = -I$(top_srcdir)/src -DGIT_REVISION=\"$(GIT_REVISION)\" -std=c++17 -Wall -Wno-sign-compare -Wno-unused-local-typedefs
+AM_CPPFLAGS = -I$(top_srcdir)/src/3rdparty/utfcpp -I$(top_srcdir)/src -DGIT_REVISION=\"$(GIT_REVISION)\" -std=c++17 -Wall -Wno-sign-compare -Wno-unused-local-typedefs
 phonetisaurus_align_SOURCES = src/bin/phonetisaurus-align.cc src/include/PhonetisaurusRex.h src/lib/util.cc src/include/util.h src/lib/LatticePruner.cc src/include/LatticePruner.h src/lib/M2MFstAligner.cc src/include/M2MFstAligner.h
 phonetisaurus_align_CXXFLAGS = $(OPENFST_CXXFLAGS) $(UTFCPP_CXXFLAGS)
 phonetisaurus_align_LDADD = $(OPENFST_LDFLAGS)
@@ -540,15 +540,15 @@ phonetisaurus_arpa2wfst_SOURCES = src/bin/phonetisaurus-arpa2wfst.cc src/include
 phonetisaurus_arpa2wfst_CXXFLAGS = $(OPENFST_CXXFLAGS) $(UTFCPP_CXXFLAGS)
 phonetisaurus_arpa2wfst_LDADD = $(OPENFST_LDFLAGS)
 phonetisaurus_g2pfst_SOURCES = src/bin/phonetisaurus-g2pfst.cc src/include/PhonetisaurusScript.h src/include/PhonetisaurusRex.h src/lib/util.cc src/include/util.h
-phonetisaurus_g2pfst_CXXFLAGS = $(OPENFST_CXXFLAGS) $(UTFCPP_CXXFLAGS) -funroll-loops -ffast-math
+phonetisaurus_g2pfst_CXXFLAGS = $(OPENFST_CXXFLAGS) $(UTFCPP_CXXFLAGS) -funroll-loops
 phonetisaurus_g2pfst_LDADD = $(OPENFST_LDFLAGS)
 phonetisaurus_g2prnn_SOURCES = src/bin/phonetisaurus-g2prnn.cc src/include/LegacyRnnLMHash.h src/include/LegacyRnnLMDecodable.h src/include/LegacyRnnLMReader.h src/include/RnnLMDecoder.h src/lib/util.cc src/include/util.h src/3rdparty/rnnlm/rnnlmlib.cpp src/3rdparty/rnnlm/rnnlmlib.h
 phonetisaurus_g2prnn_CXXFLAGS = $(OPENFST_CXXFLAGS) $(UTFCPP_CXXFLAGS) \
-	-I$(top_srcdir)/src/3rdparty/rnnlm -funroll-loops -ffast-math \
+	-I$(top_srcdir)/src/3rdparty/rnnlm \
 	$(am__append_1)
 phonetisaurus_g2prnn_LDADD = $(OPENFST_LDFLAGS) $(am__append_2)
 rnnlm_SOURCES = src/bin/rnnlm.cc src/3rdparty/rnnlm/rnnlmlib.cpp src/3rdparty/rnnlm/rnnlmlib.h
-rnnlm_CXXFLAGS = $(OPENFST_CXXFLAGS) -I$(top_srcdir)/src/3rdparty/rnnlm -funroll-loops -ffast-math
+rnnlm_CXXFLAGS = $(OPENFST_CXXFLAGS) -I$(top_srcdir)/src/3rdparty/rnnlm -funroll-loops
 rnnlm_LDADD = $(OPENFST_LDFLAGS)
 @HAVE_PYTHON_TRUE@@WANT_PYTHON_TRUE@CLEANFILES = python/Phonetisaurus-binding.cc
 @HAVE_PYTHON_DEV_TRUE@@HAVE_PYTHON_TRUE@@WANT_PYTHON_TRUE@pyexec_LTLIBRARIES = Phonetisaurus.la
