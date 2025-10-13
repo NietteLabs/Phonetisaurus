@@ -60,7 +60,7 @@ vector<string> tokenize_utf8_string (string* utf8_string, string* delimiter) {
      http://stackoverflow.com/questions/2852895/c-iterate-or-split-\
       utf-8-string-into-array-of-symbols#2856241
   */
-  char* str   = (char*) utf8_string->c_str (); // utf-8 string
+  char* str   = (char*) utf8_string->c_str ();
   char* str_i = str;                           // string iterator
   char* str_j = str;
   char* end   = str + strlen (str) + 1;        // end iterator
@@ -70,7 +70,7 @@ vector<string> tokenize_utf8_string (string* utf8_string, string* delimiter) {
 
   do {
     str_j = str_i;
-    utf8::uint32_t code = utf8::next (str_i, end); // get 32 bit code
+    utf8::utfchar32_t code = utf8::next(str_i, end); // get 32 bit code
     if (code == 0)
       continue;
     int start = strlen (str) - strlen (str_j);
@@ -86,7 +86,6 @@ vector<string> tokenize_utf8_string (string* utf8_string, string* delimiter) {
         string_vec [string_vec.size () - 1] += utf8_string->substr (start, len);
     }
   } while (str_i < end);
-  
   return string_vec;
 }
 
