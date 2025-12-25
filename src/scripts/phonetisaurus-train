@@ -217,8 +217,8 @@ class G2PModelTrainer () :
         command = [
             "lmplz",
             "-o", str (self.ngram_order),
-            "<", self.corpus_path,
-            ">", self.arpa_path
+            "--text", self.corpus_path,
+            "--arpa", self.arpa_path
         ]
 
         self.logger.debug (u" ".join (command))
