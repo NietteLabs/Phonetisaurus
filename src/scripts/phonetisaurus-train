@@ -170,8 +170,17 @@ class G2PModelTrainer () :
                     ])
                 )
             return self._mitlm
+        if lm == "kenlm" :
+            if self.which ("lmplz") == None :
+                raise EnvironmentError(
+                    " ".join([
+                        "lmplz binary 'lmplz' not ",
+                        "found in path."
+                    ])
+                )
+            return self._kenlm
         else :
-            raise NotImplementedError("Only mitlm is currently supported.")
+            raise NotImplementedError("Only mitlm and kenlm is currently supported.")
 
 
     def _mitlm (self) :
@@ -189,6 +198,27 @@ class G2PModelTrainer () :
             "-o", str (self.ngram_order),
             "-t", self.corpus_path,
             "-wl", self.arpa_path
+        ]
+
+        self.logger.debug (u" ".join (command))
+
+        return command
+
+    def _kenlm (self) :
+        """kenlm lmplz joint ngram training command.
+
+        Build the kenlm joint ngram training command using the
+        lmplz utility and provided arguments.
+
+        Returns:
+            list: The command in subprocess list format.
+        """
+
+        command = [
+            "lmplz",
+            "-o", str (self.ngram_order),
+            "<", self.corpus_path,
+            ">", self.arpa_path
         ]
 
         self.logger.debug (u" ".join (command))
